@@ -5,40 +5,10 @@ return {
     lazy = false,
     priority = 52, -- Must be loaded before mason-lspconfig, lspconfig, and mason-nvim-dap
     config = function()
-      local mason_daps = { "bash-debug-adapter", "cpptools", "java-debug-adapter", "js-debug-adapter" }
-      -- No python dap, as it is configured in nvim-dap-python, and I honestly don't know how to configure python
-      -- debugging with the executable installed by mason
-      local mason_linters = { -- From nvim-lint
-        "cpplint",
-        "cmakelint",
-        "cspell",
-        "htmlhint",
-        "checkstyle",
-        "biome",
-        "jsonlint",
-        "luacheck",
-        "checkmake",
-        "markdownlint",
-        "shellcheck",
-        "flake8",
-        "vint",
-      }
-      local mason_formatters = { -- from formatter.nvim
-        "clang-format",
-        "prettierd",
-        "latexindent",
-        "stylua",
-        "autoflake",
-        "isort",
-        "ruff",
-        "autopep8",
-        "shfmt",
-        "beautysh",
-      }
-      -- No mason_lsps, as they are configured in mason-lspconfig
+      local package_list = require("plugins.config.mason.packages")
       require("mason").setup()
       vim.api.nvim_create_user_command("MasonInstallAll", function()
-        require("plugins.config.mason.install-all-cmd")({ mason_daps, mason_linters, mason_formatters })
+        require("plugins.config.mason.install-all-cmd")(package_list)
       end, {})
       -- Comment out the following line if you don't want to install all packages on startup
       vim.cmd("MasonInstallAll")
