@@ -24,7 +24,7 @@ return {
   ["html"] = { cmds = { "npm" } },
   ["htmx"] = { cmds = { "cargo" } },
   -- Java
-  ["java_language_server"] = { cmds = { "jlink" } },
+  ["java_language_server"] = { cmds = { "jlink", "mvn" } },
   -- JSON
   ["jsonls"] = { cmds = { "npm" } },
   -- LaTeX

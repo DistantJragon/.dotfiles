@@ -4,8 +4,9 @@ return function(packages_to_check)
   local commands = {
     node = { site = "https://nodejs.org/en/download" },
   }
-  for _, cmd in pairs(commands) do
-    cmd.dependent_tools = {}
+  for cmd, cmd_info in pairs(commands) do
+    cmd_info.dependent_tools = {}
+    cmd_info.installed = vim.fn.executable(cmd) == 1
   end
 
   for tool_name, tool in pairs(packages_to_check) do
@@ -14,11 +15,18 @@ return function(packages_to_check)
       table.insert(packages_to_install, tool_name)
     else
       -- If tool has required commands, add it to the command list
+      local is_installable = true
       for _, cmd in ipairs(tool.cmds) do
         if not commands[cmd] then
-          commands[cmd] = { dependent_tools = {} }
+          commands[cmd] = { dependent_tools = {}, installed = vim.fn.executable(cmd) == 1 }
         end
         table.insert(commands[cmd].dependent_tools, tool_name)
+        if not commands[cmd].installed then
+          is_installable = false
+        end
+      end
+      if is_installable then
+        table.insert(packages_to_install, tool_name)
       end
     end
   end
@@ -29,7 +37,7 @@ return function(packages_to_check)
   local full_vim_notify_string = ""
 
   for cmd, cmd_info in pairs(commands) do
-    if not vim.fn.executable(cmd) then
+    if not cmd_info.installed then
       full_vim_notify_string = full_vim_notify_string .. string.format(missing_command_string, cmd)
       if #cmd_info.dependent_tools > 0 then
         local dependent_tools_string = table.concat(cmd_info.dependent_tools, ", ")
@@ -38,14 +46,13 @@ return function(packages_to_check)
       if cmd_info.site then
         full_vim_notify_string = full_vim_notify_string .. string.format(more_info_site_string, cmd_info.site)
       end
-    else
-      for _, tool_name in ipairs(cmd_info.dependent_tools) do
-        table.insert(packages_to_install, tool_name)
-      end
     end
   end
 
+  -- If there are any missing commands, notify the user
   if full_vim_notify_string ~= "" then
     vim.notify(full_vim_notify_string, vim.log.levels.WARN)
   end
+
+  return packages_to_install
 end

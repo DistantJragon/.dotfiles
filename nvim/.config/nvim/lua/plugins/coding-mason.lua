@@ -5,7 +5,9 @@ return {
     lazy = false,
     priority = 52, -- Must be loaded before mason-lspconfig, lspconfig, and mason-nvim-dap
     config = function()
-      local package_list = require("plugins.config.mason.packages")
+      local package_list = (require("plugins.config.mason.package_buildable_checker"))(
+        require("plugins.config.mason.packages")
+      )
       require("mason").setup()
       vim.api.nvim_create_user_command("MasonInstallAll", function()
         require("plugins.config.mason.install-all-cmd")(package_list)
@@ -21,30 +23,9 @@ return {
     lazy = false,
     priority = 51, -- Must be loaded before lspconfig
     opts = {
-      ensure_installed = {
-        "asm_lsp", -- Assembly
-        "basedpyright", -- Python
-        "bashls", -- Bash
-        "biome", -- JavaScript
-        "clangd", -- C/C++
-        "cmake", -- CMake
-        "css_variables",
-        "cssls",
-        "cssmodules_ls", -- CSS
-        "docker_compose_language_service",
-        "dockerls", -- Docker
-        "html",
-        "htmx", -- HTML/HTMX
-        "java_language_server", -- Java
-        "jsonls", -- JSON
-        "ltex", -- LaTeX
-        "lua_ls", -- Lua
-        "marksman", -- Markdown
-        "powershell_es", -- PowerShell
-        "rust_analyzer", -- Rust
-        "typos_lsp", -- Spell checking
-        "vimls", -- Vim
-      },
+      ensure_installed = (require("plugins.config.mason.package_buildable_checker"))(
+        require("plugins.config.mason-lspconfig.lsps")
+      ),
     },
     config = function(_, opts)
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
