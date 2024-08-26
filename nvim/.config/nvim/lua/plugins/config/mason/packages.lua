@@ -1,13 +1,14 @@
 -- Python command is either "py" on Linux or "python" on Windows
 local python_command = vim.fn.has("win32") == 1 and "python" or "py"
-return {
+local packages_to_install = {
   -- DAPs
   ["bash-debug-adapter"] = {},
+  -- NOTE: cpptools takes ~220 MB
   ["cpptools"] = {},
   ["java-debug-adapter"] = {},
   ["js-debug-adapter"] = {},
   -- No Python DAP, as it is configured in nvim-dap-python, and I honestly don't know how to configure Python debugging
-  -- with the executable installed by Mason
+  -- with the executable installed by mason
 
   -- Linters (configure with nvim-lint)
   ["cpplint"] = { cmds = { python_command } },
@@ -18,7 +19,6 @@ return {
   ["biome"] = {},
   ["jsonlint"] = { cmds = { "npm" } },
   ["luacheck"] = { cmds = { "luarocks" } },
-  ["checkmake"] = {},
   ["markdownlint"] = { cmds = { "npm" } },
   ["shellcheck"] = {},
   ["flake8"] = { cmds = { python_command } },
@@ -38,3 +38,11 @@ return {
 
   -- LSPs are configured in mason-lspconfig
 }
+
+-- When mason tries to install checkmake on Windows, it says "The current platform is unsupported."
+-- Could change in the future, but for now, I guess it's not supported on Windows
+if vim.fn.has("win32") == 0 then
+  packages_to_install["checkmake"] = {}
+end
+
+return packages_to_install
