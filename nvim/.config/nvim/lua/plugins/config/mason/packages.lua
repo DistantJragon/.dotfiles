@@ -16,7 +16,7 @@ local packages_to_install = {
   ["cspell"] = { cmds = { "npm" } },
   ["htmlhint"] = { cmds = { "npm" } },
   ["checkstyle"] = {},
-  ["biome"] = {},
+  ["biome"] = { cmds = { "npm" } },
   ["jsonlint"] = { cmds = { "npm" } },
   ["luacheck"] = { cmds = { "luarocks" } },
   ["markdownlint"] = { cmds = { "npm" } },

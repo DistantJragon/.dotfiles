@@ -37,12 +37,10 @@ return function(packages_to_check)
   local full_vim_notify_string = ""
 
   for cmd, cmd_info in pairs(commands) do
-    if not cmd_info.installed then
+    if not cmd_info.installed and #cmd_info.dependent_tools > 0 then
       full_vim_notify_string = full_vim_notify_string .. string.format(missing_command_string, cmd)
-      if #cmd_info.dependent_tools > 0 then
-        local dependent_tools_string = table.concat(cmd_info.dependent_tools, ", ")
-        full_vim_notify_string = full_vim_notify_string .. string.format(missing_package_string, dependent_tools_string)
-      end
+      local dependent_tools_string = table.concat(cmd_info.dependent_tools, ", ")
+      full_vim_notify_string = full_vim_notify_string .. string.format(missing_package_string, dependent_tools_string)
       if cmd_info.site then
         full_vim_notify_string = full_vim_notify_string .. string.format(more_info_site_string, cmd_info.site)
       end
