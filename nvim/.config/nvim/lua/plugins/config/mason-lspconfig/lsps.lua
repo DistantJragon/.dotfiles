@@ -5,6 +5,7 @@ return {
   ["asm_lsp"] = { cmds = { "cargo" } },
   -- Python
   -- NOTE: basedpyright takes ~160 MB
+  -- It may (probably) need cargo/rustc to build. More testing is needed.
   ["basedpyright"] = { cmds = { python_command } },
   -- Bash
   ["bashls"] = { cmds = { "npm" } },

@@ -25,13 +25,14 @@ local packages_to_install = {
   ["vint"] = { cmds = { python_command } },
 
   -- Formatters (configure with formatter.nvim)
+  -- clang-format is producing errors when trying to build on my Windows 11 laptop. NOTE: More testing needed
   ["clang-format"] = { cmds = { python_command } },
   ["prettierd"] = { cmds = { "npm" } },
   ["latexindent"] = {},
   ["stylua"] = {},
   ["autoflake"] = { cmds = { python_command } },
   ["isort"] = { cmds = { python_command } },
-  ["ruff"] = { cmds = { python_command } },
+  ["ruff"] = { cmds = { python_command, "cargo", "rustc" } },
   ["autopep8"] = { cmds = { python_command } },
   ["shfmt"] = {},
   ["beautysh"] = { cmds = { python_command } },
