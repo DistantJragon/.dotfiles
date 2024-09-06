@@ -1,14 +1,4 @@
 return {
-  -- Working with LaTeX
-  {
-    "lervag/vimtex",
-    lazy = false,
-    init = function()
-      vim.g.vimtex_view_method = "sioyek"
-      vim.g.matchup_override_vimtex = 1
-    end,
-  },
-
   -- File explorer
   {
     "nvim-tree/nvim-tree.lua",
@@ -70,14 +60,6 @@ return {
     end,
   },
 
-  -- Generates tag files. (vimTeX requested)
-  -- 'ludovicchabant/vim-gutentags',
-
-  -- Manipulate surrounding enclosions like (), [], <p> (vimTeX requested)
-  "tpope/vim-surround",
-
-  -- Extends Vim's surrounding enclosions for language specific surroundings (vimTeX requested)
-  "andymass/vim-matchup",
 
   -- Shows a popup with possible keybindings after starting a keybind sequence
   {
