@@ -43,7 +43,7 @@ return function(packages_to_check)
       local dependent_tools_string = table.concat(cmd_info.dependent_tools, ", ")
       full_vim_notify_string = full_vim_notify_string .. string.format(missing_package_string, dependent_tools_string)
       if cmd_info.info then
-        full_vim_notify_string = full_vim_notify_string .. cmd_info.info
+        full_vim_notify_string = full_vim_notify_string .. cmd_info.info .. "\n"
       elseif cmd_info.site then
         full_vim_notify_string = full_vim_notify_string .. string.format(more_info_site_string, cmd_info.site)
       end
