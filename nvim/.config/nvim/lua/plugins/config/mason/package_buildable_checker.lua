@@ -3,6 +3,7 @@ return function(packages_to_check)
 
   local commands = {
     node = { site = "https://nodejs.org/en/download" },
+    jlink = { info = "jlink is included in the Java Development Kit (JDK)." },
   }
   for cmd, cmd_info in pairs(commands) do
     cmd_info.dependent_tools = {}
@@ -41,7 +42,9 @@ return function(packages_to_check)
       full_vim_notify_string = full_vim_notify_string .. string.format(missing_command_string, cmd)
       local dependent_tools_string = table.concat(cmd_info.dependent_tools, ", ")
       full_vim_notify_string = full_vim_notify_string .. string.format(missing_package_string, dependent_tools_string)
-      if cmd_info.site then
+      if cmd_info.info then
+        full_vim_notify_string = full_vim_notify_string .. cmd_info.info
+      elseif cmd_info.site then
         full_vim_notify_string = full_vim_notify_string .. string.format(more_info_site_string, cmd_info.site)
       end
     end
