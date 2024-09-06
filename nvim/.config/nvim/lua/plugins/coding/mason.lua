@@ -5,7 +5,7 @@ return {
     lazy = false,
     priority = 52, -- Must be loaded before mason-lspconfig, lspconfig, and mason-nvim-dap
     config = function()
-      local package_list = (require("plugins.config.mason.package_buildable_checker"))(
+      local package_list = (require("plugins.config.mason.package-buildable-filter"))(
         require("plugins.config.mason.packages")
       )
       require("mason").setup()
@@ -23,7 +23,7 @@ return {
     lazy = false,
     priority = 51, -- Must be loaded before lspconfig
     opts = {
-      ensure_installed = (require("plugins.config.mason.package_buildable_checker"))(
+      ensure_installed = (require("plugins.config.mason.package-buildable-filter"))(
         require("plugins.config.mason-lspconfig.lsps")
       ),
     },
