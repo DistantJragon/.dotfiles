@@ -13,7 +13,7 @@ return {
         require("plugins.config.mason.install-all-cmd")(package_list)
       end, {})
       -- Comment out the following line if you don't want to install all packages on startup
-      vim.cmd("MasonInstallAll")
+      require("plugins.config.mason.install-all-cmd")(package_list)
     end,
   },
 
@@ -94,7 +94,7 @@ return {
     "mfussenegger/nvim-dap",
     config = function()
       -- python is configured within nvim-dap-python. Languages with no extensions can be added here.
-      -- Configure adapters and configurations for them
+      -- Configure adapters and configurations for the languages
       local dap = require("dap")
       dap.adapters.cppdbg = {
         id = "cppdbg",
