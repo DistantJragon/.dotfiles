@@ -7,8 +7,9 @@ local packages_to_install = {
   ["cpptools"] = {},
   ["java-debug-adapter"] = {},
   ["js-debug-adapter"] = {},
-  -- No Python DAP, as it is configured in nvim-dap-python, and I honestly don't know how to configure Python debugging
-  -- with the executable installed by mason
+  -- No Python DAP listed here
+  -- Python DAP is configured in nvim-dap-python
+  -- I haven't figured out how to configure Python debugging with the executable installed by mason
 
   -- Linters (configure with nvim-lint)
   ["cpplint"] = { cmds = { python_command } },
@@ -25,7 +26,6 @@ local packages_to_install = {
   ["vint"] = { cmds = { python_command } },
 
   -- Formatters (configure with formatter.nvim)
-  -- clang-format is producing errors when trying to build on my Windows 11 laptop. NOTE: More testing needed
   ["clang-format"] = { cmds = { python_command } },
   ["prettierd"] = { cmds = { "npm" } },
   ["latexindent"] = {},
