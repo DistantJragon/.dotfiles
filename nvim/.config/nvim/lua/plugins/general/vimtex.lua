@@ -16,13 +16,7 @@ local M = {
   "tpope/vim-surround",
 }
 
-if
-  vim.fn.executable("cc") == 1
-  or vim.fn.executable("gcc") == 1
-  or vim.fn.executable("clang") == 1
-  or vim.fn.executable("cl") == 1
-  or vim.fn.executable("zig") == 1
-then
+if require("plugins.config.has-c-compiler") then
   -- Extends Vim's surrounding enclosions for language specific surroundings (vimTeX requested)
   table.insert(M, "andymass/vim-matchup")
 end
