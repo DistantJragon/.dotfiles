@@ -17,6 +17,8 @@ cross-platform as well.
 
 - git
 - GNU Stow (for Linux)
+- PowerShell (for Windows)
+- Knowledge found in the [wiki](https://www.github.com/DistantJragon/.dotfiles/wiki)
 
 ### Instructions
 
@@ -37,12 +39,14 @@ For Windows:
 
 You can update these dotfiles by simply running git pull in the repository's directory. However, should you wish to make
 changes to any of the dotfiles due to personal preference and wish to make the update process less painful, you should
-maintain a new git branch for your changes.
+maintain a new git branch for your changes.  
+
+(Any text inside angled brackets <> should be replaced with the appropriate text.)
 
 1. Create a new branch with `git checkout -b <branch-name>` in the dotfiles' root directory.
 2. Edit the dotfiles to your liking.
 3. Add your changes with `git add <file>`. (Or `git add .` in the dotfiles' root directory to add all changes)
-4. Commit your changes with `git commit -m "<commit-message>"`\*.
+4. Commit your changes with `git commit -m "<commit-message>"`.
 5. Once you want to update, switch back to the master branch with `git checkout master`.
 6. Pull the latest changes with `git pull`. This will update the master branch to the latest version.
 7. Switch back to your branch with `git checkout <branch-name>`.
