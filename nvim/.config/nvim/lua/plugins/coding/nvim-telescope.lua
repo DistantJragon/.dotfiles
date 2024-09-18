@@ -38,16 +38,29 @@ return {
 
     vim.api.nvim_create_autocmd({ "LspAttach" }, {
       callback = function()
-        require("which-key").register({
-          g = {
-            name = "Goto",
-            d = { vim.lsp.buf.definition, "Go to definition" },
-            r = {
-              require("telescope.builtin").lsp_references,
-              "Open a telescope window with references",
-            },
+        -- which-key spec v2
+        -- require("which-key").register({
+        --     g = {
+        --       name = "Goto",
+        --       d = { vim.lsp.buf.definition, "Go to definition" },
+        --       r = {
+        --         require("telescope.builtin").lsp_references,
+        --         "Open a telescope window with references",
+        --       },
+        --     },
+        --   }, { buffer = 0 })
+        -- end,
+        -- which-key spec v3
+        require("which-key").add({
+          { "g", buffer = 0, group = "Goto" },
+          { "gd", vim.lsp.buf.definition, buffer = 0, desc = "Go to definition" },
+          {
+            "gr",
+            require("telescope.builtin").lsp_references,
+            buffer = 0,
+            desc = "Open a telescope window with references",
           },
-        }, { buffer = 0 })
+        })
       end,
     })
   end,
