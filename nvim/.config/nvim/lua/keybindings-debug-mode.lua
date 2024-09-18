@@ -1,3 +1,5 @@
+vim.g.DJNCFG_debug_mode_mappings = false
+
 local original_keymaps = {
   n = vim.api.nvim_get_keymap("n"),
   i = vim.api.nvim_get_keymap("i"),
@@ -29,12 +31,30 @@ local debug_keymappings = {
 }
 
 local function debug_mode_activate()
+  if vim.g.DJNCFG_debug_mode_mappings then
+    vim.notify(
+      "Debug mode mappings already active. This shouldn't happen...",
+      vim.log.levels.WARN,
+      { title = "Debug Mode" }
+    )
+    return
+  end
+  vim.g.DJNCFG_debug_mode_mappings = true
   for key, value in pairs(debug_keymappings) do
     vim.keymap.set("n", key, value.bind, { silent = true, desc = value.desc })
   end
 end
 
 local function debug_mode_deactivate()
+  if not vim.g.DJNCFG_debug_mode_mappings then
+    vim.notify(
+      "Debug mode mappings already deactivated. This shouldn't happen...",
+      vim.log.levels.WARN,
+      { title = "Debug Mode" }
+    )
+    return
+  end
+  vim.g.DJNCFG_debug_mode_mappings = false
   for key, value in pairs(debug_keymappings) do
     if original_keymaps.n[key] then
       vim.keymap.set("n", key, original_keymaps.n[key].rhs, original_keymaps.n[key])
@@ -44,9 +64,22 @@ local function debug_mode_deactivate()
   end
 end
 
+local function check_debug_mode()
+  if vim.g.DJNCFG_debug_mode_mappings ~= vim.t.djn_debug_mode then
+    if vim.g.DJNCFG_debug_mode_mappings then
+      debug_mode_deactivate()
+    else
+      debug_mode_activate()
+    end
+  end
+end
+
 vim.keymap.set("n", "<Leader>db", function()
-  vim.g.djn_debug_mode = not vim.g.djn_debug_mode
-  if vim.g.djn_debug_mode then
+  -- If vim.t.djn_debug_mode is not defined, set it to false
+  vim.t.djn_debug_mode = vim.t.djn_debug_mode or false
+  -- Toggle the debug mode
+  vim.t.djn_debug_mode = not vim.t.djn_debug_mode
+  if vim.t.djn_debug_mode then
     require("dapui").open()
     debug_mode_activate()
   else
@@ -56,5 +89,14 @@ vim.keymap.set("n", "<Leader>db", function()
 end, { desc = "Toggle Debug Mode" })
 
 vim.keymap.set("n", "<Leader>ddb", function()
-  vim.g.djn_debug_mode = not vim.g.djn_debug_mode
+  vim.t.djn_debug_mode = vim.t.djn_debug_mode or false
+  vim.t.djn_debug_mode = not vim.t.djn_debug_mode
 end, { desc = "Toggle Debug Mode global variable" })
+
+-- When the user changes tab, if that tab isn't also in debug mode, deactivate the debug mode mappings using an autocmd
+vim.api.nvim_create_augroup("DJNCFG_debug_mode", { clear = false })
+vim.api.nvim_create_autocmd("TabEnter", {
+  group = "DJNCFG_debug_mode",
+  pattern = "*",
+  callback = check_debug_mode,
+})

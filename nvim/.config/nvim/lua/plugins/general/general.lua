@@ -29,7 +29,7 @@ return {
         lualine_a = {
           "mode",
           function()
-            return vim.g.djn_debug_mode and "DEBUG" or ""
+            return vim.g.DJNCFG_debug_mode_mappings and "DEBUG" or ""
           end,
         },
         lualine_b = { "branch", "diff", "diagnostics" },
