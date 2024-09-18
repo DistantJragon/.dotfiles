@@ -8,7 +8,9 @@ return {
       local package_list = (require("plugins.config.mason.package-buildable-filter"))(
         require("plugins.config.mason.packages")
       )
-      require("mason").setup()
+      require("mason").setup({
+        -- log_level = vim.log.levels.DEBUG,
+      })
       vim.api.nvim_create_user_command("MasonInstallAll", function()
         require("plugins.config.mason.install-all-cmd")(package_list)
       end, {})
