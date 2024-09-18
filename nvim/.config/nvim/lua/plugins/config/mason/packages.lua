@@ -1,5 +1,3 @@
--- Python command is either "py" on Linux or "python" on Windows
-local python_command = vim.fn.has("win32") == 1 and "python" or "py"
 local packages_to_install = {
   -- DAPs
   ["bash-debug-adapter"] = {},
@@ -12,8 +10,8 @@ local packages_to_install = {
   -- I haven't figured out how to configure Python debugging with the executable installed by mason
 
   -- Linters (configure with nvim-lint)
-  ["cpplint"] = { cmds = { python_command } },
-  ["cmakelint"] = { cmds = { python_command } },
+  ["cpplint"] = { cmds = { "python" } },
+  ["cmakelint"] = { cmds = { "python" } },
   ["cspell"] = { cmds = { "npm" } },
   ["htmlhint"] = { cmds = { "npm" } },
   ["checkstyle"] = {},
@@ -22,20 +20,20 @@ local packages_to_install = {
   ["luacheck"] = { cmds = { "luarocks" } },
   ["markdownlint"] = { cmds = { "npm" } },
   ["shellcheck"] = {},
-  ["flake8"] = { cmds = { python_command } },
-  ["vint"] = { cmds = { python_command } },
+  ["flake8"] = { cmds = { "python" } },
+  ["vint"] = { cmds = { "python" } },
 
   -- Formatters (configure with formatter.nvim)
-  ["clang-format"] = { cmds = { python_command } },
+  ["clang-format"] = { cmds = { "python" } },
   ["prettierd"] = { cmds = { "npm" } },
   ["latexindent"] = {},
   ["stylua"] = {},
-  ["autoflake"] = { cmds = { python_command } },
-  ["isort"] = { cmds = { python_command } },
-  ["ruff"] = { cmds = { python_command, "cargo", "rustc" } },
-  ["autopep8"] = { cmds = { python_command } },
+  ["autoflake"] = { cmds = { "python" } },
+  ["isort"] = { cmds = { "python" } },
+  ["ruff"] = { cmds = { "python", "cargo", "rustc" } },
+  ["autopep8"] = { cmds = { "python" } },
   ["shfmt"] = {},
-  ["beautysh"] = { cmds = { python_command } },
+  ["beautysh"] = { cmds = { "python" } },
 
   -- LSPs are configured in mason-lspconfig
 }

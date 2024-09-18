@@ -1,12 +1,10 @@
--- Python command is either "py" on Linux or "python" on Windows
-local python_command = vim.fn.has("win32") == 1 and "python" or "py"
 return {
   -- Assembly
   ["asm_lsp"] = { cmds = { "cargo" } },
   -- Python
   -- NOTE: basedpyright takes ~160 MB
   -- It may (probably) need cargo/rustc to build. More testing is needed.
-  ["basedpyright"] = { cmds = { python_command } },
+  ["basedpyright"] = { cmds = { "python" } },
   -- Bash
   ["bashls"] = { cmds = { "npm" } },
   -- JavaScript
@@ -14,7 +12,7 @@ return {
   -- C/C++
   ["clangd"] = {},
   -- CMake
-  ["cmake"] = { cmds = { python_command } },
+  ["cmake"] = { cmds = { "python" } },
   -- CSS
   ["css_variables"] = { cmds = { "npm" } },
   ["cssls"] = { cmds = { "npm" } },
@@ -27,7 +25,8 @@ return {
   -- HTMX
   ["htmx"] = { cmds = { "cargo" } },
   -- Java
-  ["java_language_server"] = { cmds = { "jlink", "mvn" } },
+  -- ["java_language_server"] = { cmds = { "jlink", "mvn", "bash" } },
+  ["jdtls"] = {},
   -- JSON
   ["jsonls"] = { cmds = { "npm" } },
   -- LaTeX
