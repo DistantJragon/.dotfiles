@@ -99,10 +99,10 @@ return {
       dap.adapters.cppdbg = {
         id = "cppdbg",
         type = "executable",
-        command = "OpenDebugAD7", -- mason should have added this to the path, so it should work
+        -- command = "OpenDebugAD7", -- mason should have added this to the path, so it should work (it doesnt?)
+        command = vim.fn.exepath("OpenDebugAD7"),
       }
       if vim.fn.has("win32") == 1 then
-        -- dap.adapters.cppdbg.command = 'OpenDebugAD7.exe'
         dap.adapters.cppdbg.options = { detached = false }
       end
       dap.configurations.cpp = {
