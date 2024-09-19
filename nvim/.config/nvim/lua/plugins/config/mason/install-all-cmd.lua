@@ -11,9 +11,8 @@ return function(package_table)
   end
   -- local install_handle_list = {}
   for _, pkg_str in ipairs(packages_to_install) do
-    -- table.insert(install_handle_list, registry.get_package(pkg_str).install())
-    local package_from_registry = registry.get_package(pkg_str)
-    _ = package_from_registry:install()
+    -- table.insert(install_handle_list, registry.get_package(pkg_str):install())
+    registry.get_package(pkg_str):install()
   end
   if #packages_not_found > 0 then
     vim.notify(

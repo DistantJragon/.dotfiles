@@ -1,6 +1,6 @@
 -- Providers can be disabled by setting the loaded_<name>_provider variable to 0.
--- You can set a specific path to a provider if you please. It may be needed if, for example, you have multiple versions
--- of python installed on your system.
+-- You can set a specific path to a provider if you please.
+-- It may be needed if, for example, you have multiple versions of python installed on your system.
 -- Otherwise, nvim will try to find the provider in your PATH.
 
 -- vim.g.loaded_node_provider = 0

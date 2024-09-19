@@ -24,7 +24,7 @@ return {
     config = function()
       vim.o.hidden = true
       require("toggleterm").setup({
-        open_mapping = [[<Space>tt]],
+        open_mapping = [[<Leader>tt]],
         insert_mappings = false,
       })
     end,

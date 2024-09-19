@@ -1,3 +1,6 @@
+-- This is a list of options that are changed in this config
+-- This is NOT an exhaustive list of all Neovim options (:h option-list)
+
 -- Set options
 local set = vim.opt
 
