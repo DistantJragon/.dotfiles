@@ -11,6 +11,11 @@ update-djn() {
   if (( news_status == 0 )); then
     sudo pacman -Syu
     paru -Syu
+    rustup update
+    cargo install-update -a
+    sudo npm update -g
+    uv tool update --all
+    return 0
   elif (( news_status == 2 )); then
     echo "There are new Arch Linux news items. Please read them before updating. (arch-news-checker-djn -h)"
     return 1
