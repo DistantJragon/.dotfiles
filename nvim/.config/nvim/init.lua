@@ -4,10 +4,12 @@ require("host-programs")
 -- Set the leader key (needs to be set before any mappings, even plugin mappings)
 vim.g.mapleader = " "
 
+-- Set nvim options before loading plugins
+require("nvim-options")
+
 -- Set powershell as the shell before any plugins are loaded (important for toggleterm)
 -- Powershell is only set if the OS is Windows (or if it is forced in set-shell-powershell.lua)
 require("set-shell-powershell")
 require("lazy-init")
 require("djnlspconfig")
 require("keybindings")
-require("nvim-options")
