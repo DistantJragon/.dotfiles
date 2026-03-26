@@ -60,3 +60,6 @@ alias lh='eza --color=always --group-directories-first --icons=automatic'
 
 export MANROFFOPT="-c"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
