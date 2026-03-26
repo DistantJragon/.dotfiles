@@ -13,7 +13,7 @@ vim.lsp.config("ltex", {
     ltex = {
       language = "en-US",
       disabledRules = {
-        ["en-US"] = { "MORFOLOGIK_RULE_EN_US" },
+        -- ["en-US"] = { "MORFOLOGIK_RULE_EN_US" },
       },
     },
   },
