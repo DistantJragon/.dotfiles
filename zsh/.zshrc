@@ -12,9 +12,8 @@ eval "$(zoxide init zsh)"
 # You may have to rebuild your completions cache by running
 # rm ~/.zcompdump*; compinit.
 
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/share/zsh-antidote/antidote.zsh
+antidote load
 
 typeset -A ZSH_HIGHLIGHT_STYLES
 
