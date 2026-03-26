@@ -58,8 +58,8 @@ fi
 
 eval "$(zoxide init --cmd cd zsh)"
 
-alias ls='eza -l --color=always --group-directories-first --icons'
-alias lh='eza --color=always --group-directories-first --icons'
+alias ls='eza -l --color=always --group-directories-first --icons=automatic'
+alias lh='eza --color=always --group-directories-first --icons=automatic'
 
 export MANROFFOPT="-c"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
