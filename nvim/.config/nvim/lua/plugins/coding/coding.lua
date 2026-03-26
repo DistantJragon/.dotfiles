@@ -3,6 +3,7 @@ return {
   {
     "github/copilot.vim",
     lazy = false,
+    cond = os.getenv("DJN_COPILOT") ~= "0",
     config = function()
       vim.keymap.set(
         "i",
