@@ -18,6 +18,7 @@ vim.lsp.config("ltex", {
     },
   },
 })
+vim.lsp.enable("ltex")
 
 vim.lsp.config("lua_ls", {
   on_init = function(client)
@@ -71,3 +72,16 @@ vim.lsp.config("lua_ls", {
     Lua = {},
   },
 })
+vim.lsp.enable("lua_ls")
+
+-- LSP servers with no special configuration
+
+vim.lsp.enable("basedpyright")
+vim.lsp.enable("bashls")
+vim.lsp.enable("biome")
+vim.lsp.enable("clangd")
+-- CSS
+vim.lsp.enable("rust_analyzer")
+vim.lsp.enable("systemd_lsp")
+vim.lsp.enable("taplo")
+vim.lsp.enable("yamlls")
