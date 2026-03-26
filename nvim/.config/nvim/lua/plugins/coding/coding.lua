@@ -81,7 +81,6 @@ return {
 
           -- You can call `try_lint` with a linter name or a list of names to always
           -- run specific linters, independent of the `linters_by_ft` configuration
-          require("lint").try_lint("cspell")
         end,
       })
       -- The rest of the linters can be run when the buffer is changed
@@ -89,10 +88,9 @@ return {
         callback = function()
           local ft_stdin = { "latex", "html", "json", "python", "lua", "ps1", "sh" }
           local ft = vim.bo.filetype
-          if not ft_stdin[ft] then
-            return
+          if ft_stdin[ft] then
+            require("lint").try_lint()
           end
-          require("lint").try_lint()
           require("lint").try_lint("cspell")
         end,
       })
