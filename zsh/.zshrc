@@ -51,9 +51,7 @@ precmd() {
 # If ~/.config/djn-zsh/functions dir has files, add to fpath and autoload them.
 if [[ -d "$HOME/.config/djn-zsh/functions" ]]; then
   fpath=("$HOME/.config/djn-zsh/functions" $fpath)
-  for func_file in "$HOME/.config/djn-zsh/functions"/*(.N); do
-    autoload -Uz "$(basename "$func_file")"
-  done
+  autoload -Uz "$HOME/.config/djn-zsh/functions/"*(.N:t)
 fi
 
 eval "$(zoxide init --cmd cd zsh)"
