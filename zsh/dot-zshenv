@@ -2,3 +2,5 @@
 
 # uv
 export PATH="/home/jacob/.local/bin:$PATH"
+
+[[ -d "$GOBIN" ]] && path+=("$GOBIN")
