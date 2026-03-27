@@ -8,6 +8,7 @@ vim.lsp.config("*", {
   capabilities = capabilities,
 })
 
+-- LaTeX
 vim.lsp.config("ltex", {
   settings = {
     ltex = {
@@ -20,6 +21,7 @@ vim.lsp.config("ltex", {
 })
 vim.lsp.enable("ltex")
 
+-- Lua
 vim.lsp.config("lua_ls", {
   on_init = function(client)
     local path = ""
@@ -75,12 +77,26 @@ vim.lsp.enable("lua_ls")
 
 -- LSP servers with no special configuration
 
+-- Python
 vim.lsp.enable("basedpyright")
+
+-- Bash
 vim.lsp.enable("bashls")
+
+-- JavaScript, TypeScript, CSS?, HTML?, JSON?, ...
 vim.lsp.enable("biome")
+
+-- C, C++
 vim.lsp.enable("clangd")
--- CSS
+
+-- Rust
 vim.lsp.enable("rust_analyzer")
+
+-- Systemd
 vim.lsp.enable("systemd_lsp")
+
+-- TOML
 vim.lsp.enable("taplo")
+
+-- YAML
 vim.lsp.enable("yamlls")
