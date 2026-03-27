@@ -98,22 +98,16 @@ return {
     end,
     config = function()
       require("lint").linters_by_ft = {
-        c = { "cpplint" },
         cmake = { "cmakelint" },
-        cpp = { "cpplint" },
         html = { "htmlhint" },
         java = { "checkstyle" },
-        javascript = { "biomejs" },
         json = { "jsonlint" },
-        latex = { "chktex" }, -- Not in mason
-        lua = { "luacheck" },
+        latex = { "chktex" },
         make = { "checkmake" },
         markdown = { "markdownlint" },
         ps1 = { "shellcheck" },
-        python = { "flake8" },
         sh = { "shellcheck" },
         vim = { "vint" },
-        zsh = { "zsh" }, -- Not in mason
       }
     end,
   },
