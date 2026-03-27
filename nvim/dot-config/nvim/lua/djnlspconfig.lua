@@ -34,7 +34,6 @@ vim.lsp.config("lua_ls", {
       neovim_config_path = neovim_config_path:gsub("\\", "/")
     end
     if neovim_config_path:find(path, 1, true) then
-      print("config ran")
       client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
         runtime = {
           -- Tell the language server which version of Lua you're using (most
