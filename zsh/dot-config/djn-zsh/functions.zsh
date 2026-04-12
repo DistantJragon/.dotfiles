@@ -2,31 +2,36 @@
 
 DJN_MAX_SHORTENED_CWD_LENGTH=20
 
-# This is run within the chpwd hook, so it runs after the directory is changed, but before the prompt is generated.
+# This is run within the chpwd hook, so it runs after the directory is changed,
+# but before the prompt is generated.
 djn-shorten-cwd() {
   local cwd="$PWD"
-  local home="$HOME"
 
   # Replace home directory with ~
-  if [[ "$cwd" == "$home"* ]]; then
-    cwd="~${cwd#$home}"
+  if [[ "$cwd" == "$HOME"* ]]; then
+    cwd="~${cwd#$HOME}"
   fi
 
-  # # While the path is too long, shorten it by taking off the first directory
-  # local shortened="$cwd"
-  # while ((${#shortened} > ${DJN_MAX_SHORTENED_LENGTH:-20})); do
-  #   shortened="${shortened#*/}"
-  # done
+  # We want as many parent folders as possible without exceeding the max length,
+  # unless the first parent folder is already too long,
+  # in which case we just show the last part of the path.
 
-  # If the cwd is too long, get the last x characters, then remove the starting characters until the first slash
+  # First, we check if the parent folder is too long.
+  # If it is, we just show the last part of the path.
+  # Otherwise, we get the last x characters,
+  # then remove the starting characters until the first slash.
   local shortened="$cwd"
-
   if ((${#shortened} > DJN_MAX_SHORTENED_CWD_LENGTH)); then
-    # We add 1 to max_length because we are removing at least one character (at least one slash) no matter what
-    shortened="${shortened: -$((DJN_MAX_SHORTENED_CWD_LENGTH + 1))}"
-    shortened="${shortened#*/}"
+    local parent="${shortened##*/}"
+    if ((${#parent} >= DJN_MAX_SHORTENED_CWD_LENGTH)); then
+      shortened="$parent"
+    else
+      # We add 1 to max_length because we are removing at least one character
+      # (at least one slash) no matter what
+      shortened="${shortened: -$((DJN_MAX_SHORTENED_CWD_LENGTH + 1))}"
+      shortened="${shortened#*/}"
+    fi
   fi
-
   DJN_SHORTENED_CWD="$shortened"
 }
 
