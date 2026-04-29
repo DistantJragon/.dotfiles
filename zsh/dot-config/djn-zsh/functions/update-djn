@@ -13,7 +13,8 @@ update-djn() {
     paru -Syu
     rustup update
     cargo install-update -a
-    sudo npm update -g
+    # If this command fails due to permissions, you need to configure npm to use a prefix.
+    npm update -g
     uv tool update --all
     return 0
   elif (( news_status == 2 )); then

@@ -4,3 +4,5 @@
 export PATH="/home/jacob/.local/bin:$PATH"
 
 [[ -d "$GOBIN" ]] && path+=("$GOBIN")
+
+[[ -d "$HOME/.local/npm/bin" ]] && path+=("$HOME/.local/npm/bin")
