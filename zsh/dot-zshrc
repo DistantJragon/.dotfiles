@@ -6,7 +6,7 @@ SAVEHIST=10000
 
 autoload -Uz compinit && compinit
 
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 # For completions to work,
 # the above line must be added after compinit is called.
 # You may have to rebuild your completions cache by running
@@ -52,8 +52,6 @@ if [[ -d "$HOME/.config/djn-zsh/functions" ]]; then
   fpath=("$HOME/.config/djn-zsh/functions" $fpath)
   autoload -Uz "$HOME/.config/djn-zsh/functions/"*(.N:t)
 fi
-
-eval "$(zoxide init --cmd cd zsh)"
 
 alias ls='eza -l --color=always --group-directories-first --icons=automatic'
 alias lh='eza --color=always --group-directories-first --icons=automatic'
