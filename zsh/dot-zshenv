@@ -1,8 +1,12 @@
+_DJN_PREPEND_TO_PATH() {
+  if [[ -d "$1" && ":$PATH:" != *":$1:"* ]]; then
+    export PATH="$1:$PATH"
+  fi
+}
+
 . "$HOME/.cargo/env"
+_DJN_PREPEND_TO_PATH "$HOME/.local/bin"
+_DJN_PREPEND_TO_PATH "$GOBIN"
+_DJN_PREPEND_TO_PATH "$HOME/.local/npm/bin"
 
-# uv
-export PATH="/home/jacob/.local/bin:$PATH"
-
-[[ -d "$GOBIN" ]] && path+=("$GOBIN")
-
-[[ -d "$HOME/.local/npm/bin" ]] && path+=("$HOME/.local/npm/bin")
+unset -f _DJN_PREPEND_TO_PATH
