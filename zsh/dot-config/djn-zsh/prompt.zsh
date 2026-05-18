@@ -14,6 +14,8 @@ djn-prompt-cmd() {
 
   local git_head_display="" git_dirty="" git_ahead="" git_behind=""
   if [[ "$VCS_STATUS_RESULT" == "ok-sync" ]]; then
+
+    # Git HEAD display
     if [[ -n "$VCS_STATUS_REMOTE_BRANCH" ]]; then
       git_head_display="  $VCS_STATUS_REMOTE_BRANCH"
     elif [[ -n "$VCS_STATUS_LOCAL_BRANCH" ]]; then
@@ -23,7 +25,11 @@ djn-prompt-cmd() {
     else
       git_head_display=" @$VCS_STATUS_COMMIT"
     fi
+
+    # Git dirty state display
     (( VCS_STATUS_HAS_UNSTAGED == 1 )) && git_dirty=" *"
+
+    # Git ahead/behind display
     if (( VCS_STATUS_COMMITS_AHEAD )); then
       git_ahead="↑${VCS_STATUS_COMMITS_AHEAD} "
       (( VCS_STATUS_COMMITS_AHEAD > 99 )) && git_ahead="↑󰶼 "
